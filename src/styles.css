@@ -7,7 +7,7 @@
 @import '@ctrl/ngx-emoji-mart/picker';
 @import 'app/themes/dome.theme.scss';
 @import 'app/themes/bae.theme.scss';
-@import 'app/themes/pgtec.theme.scss';
+@import 'app/themes/citcom.theme.scss';
 
 /* 3. CAPAS PERSONALIZADAS Y ESTILOS GLOBALES AL FINAL */
 /* You can add global styles to this file, and also import other style files */

@@ -1,7 +1,6 @@
-import {NavLink, ThemeConfig} from './theme.interfaces';
-import {environment} from "../../environments/environment";
+import { NavLink, ThemeConfig } from './theme.interfaces';
 
-const pgtecHeaderLinks: NavLink[] = [
+const citcomHeaderLinks: NavLink[] = [
   {
     label: 'HEADER._home',
     url: '/',
@@ -15,20 +14,20 @@ const pgtecHeaderLinks: NavLink[] = [
       { label: 'HEADER._catalogs', url: '/catalogues', isRouterLink: true }
     ]
   }
-  ];
+];
 
 
-export const PGTEC_THEME_CONFIG: ThemeConfig = {
-  name: 'PGTEC',
-  displayName: 'PGTEC Marketplace',
+export const CITCOM_THEME_CONFIG: ThemeConfig = {
+  name: 'CITCOM',
+  displayName: 'CITCOM Marketplace',
   isDefault: true,
   assets: {
-    logoUrl: 'assets/themes/pgtec/logo_PGTEC.png',
-    jumboBgUrl: 'assets/themes/pgtec/blueBackground.png',
-    cardDefaultBgUrl: 'assets/themes/pgtec/cardBackground.svg'
+    logoUrl: 'assets/themes/citcom/logo-citcom.png',
+    jumboBgUrl: 'assets/themes/citcom/blueBackground.png',
+    cardDefaultBgUrl: 'assets/themes/citcom/cardBackground.svg'
   },
   links: {
-    headerLinks: pgtecHeaderLinks,
+    headerLinks: citcomHeaderLinks,
   },
   dashboard: {
     showFeaturedOfferings: true,

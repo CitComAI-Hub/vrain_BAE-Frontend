@@ -57,7 +57,8 @@
       </div>
     </div>
     <div class="border-white/15 py-[22px]">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[14px] leading-[1.5] text-white/55">
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[14px] leading-[1.5] text-white/55">
         <app-europe-trademark></app-europe-trademark>
       </div>
     </div>
@@ -65,7 +66,8 @@
 </footer>
 } @else {
 <div>
-  <div class="flex h-[25px] justify-center md:justify-between items-center bg-white border-t border-gray-200 shadow dark:bg-tertiary-50 dark:border-gray-600 p-4">
+  <div
+    class="flex h-[25px] justify-center md:justify-between items-center bg-white border-t border-gray-200 shadow dark:bg-tertiary-50 dark:border-gray-600 p-4">
     <div class="hidden md:flex justify-start text-gray-500 dark:text-gray-400">
       @for (social of socialLinks; track social.url) {
       <fa-icon (click)="openNewTab(social.url!)" [ngClass]="{ 'mr-4': !$last }" class="cursor-pointer"
@@ -101,20 +103,9 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="logo-group funded-logos">
-          <a href="https://vrain.upv.es/" target="_blank" rel="noopener" class="footer-link">
-            <img [attr.src]="'/assets/themes/pgtec/vrain_white_1.png'" alt="VRAIN logo" class="footer-img vrain-logo">
-          </a>
-          <a href="https://pgtec-vrain.github.io/" target="_blank" rel="noopener" class="footer-link">
-            <img [attr.src]="'/assets/themes/pgtec/logo_upv2.png'" alt="PGTEC VRAIN logo" class="footer-img pgtec-logo">
-          </a>
-          <a href="https://avance.digital.gob.es/" target="_blank" rel="noopener" class="footer-link">
-            <img [attr.src]="'/assets/themes/pgtec/logo_MTDFP-SEDIA.png'" alt="SEDIA logo" class="footer-img sedia-logo">
-          </a>
           <a href="https://next-generation-eu.europa.eu/" target="_blank" rel="noopener" class="footer-link">
-            <img [attr.src]="'/assets/themes/pgtec/logo_eu.png'" alt="NextGenerationEU logo" class="footer-img eu-logo">
-          </a>
-          <a href="https://cindi.gva.es/" target="_blank" rel="noopener" class="footer-link">
-            <img [attr.src]="'/assets/themes/pgtec/logo_PRTR_3.png'" alt="GVA logo" class="footer-img gva-logo">
+            <img [attr.src]="'/assets/themes/citcom/eu-co-funded.png'" alt="NextGenerationEU logo"
+              class="footer-img eu-logo">
           </a>
         </div>
       </div>

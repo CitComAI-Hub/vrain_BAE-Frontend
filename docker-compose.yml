@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "2000"
+    extra_hosts:
+      - "proxy.docker:host-gateway"
+    restart: unless-stopped
+
+  build-frontend:
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./dist:/app/dist
+    command: [ "npm", "run", "build", "--", "--configuration", "production" ]
