@@ -19,7 +19,7 @@ const citcomHeaderLinks: NavLink[] = [
 
 export const CITCOM_THEME_CONFIG: ThemeConfig = {
   name: 'CITCOM',
-  displayName: 'CITCOM Marketplace',
+  displayName: 'Marketplace-Citcom.ai',
   isDefault: true,
   assets: {
     logoUrl: 'assets/themes/citcom/logo-citcom.png',

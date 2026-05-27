@@ -34,12 +34,12 @@ export interface IDashboardStats {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrl: './dashboard.onboarding.component.css',
   standalone: true,
   imports: [TranslateModule, ReactiveFormsModule, FeaturedComponent, NgClass, DashboardWhatsDome, DashboardHeroComponent, DashboardStatsComponent, DashboardServicesComponent, DashboardCustomersComponent, DashboardProvidersComponent, DashboardEcosystemComponent],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  customersLink = 'https://onboard.sbx.evidenceledger.eu/register-customer';
+  customersLink = 'https://citcomtef.eu/';
   providersLink = "https://onboard.sbx.evidenceledger.eu/register-provider";
 
 

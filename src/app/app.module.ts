@@ -15,7 +15,6 @@ import { ErrorMessageComponent } from 'src/app/shared/error-message/error-messag
 import { appConfigFactory } from './app-config-factory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatbotWidgetComponent } from './chatbot-widget/chatbot-widget.component';
 import { RequestInterceptor } from './interceptors/requests-interceptor';
 import { ContactUsComponent } from './offerings/contact-us/contact-us.component';
 import { ExploreDomeComponent } from "./offerings/explore-dome/explore-dome.component";
@@ -169,7 +168,6 @@ import { RequestValidationModalComponent } from './pages/seller-offerings/offeri
     ReactiveFormsModule,
     PickerComponent,
     NgxFileDropModule,
-    ChatbotWidgetComponent,
     QuotesModule,
     MarkdownModule.forRoot(),
     TranslateModule.forRoot({
