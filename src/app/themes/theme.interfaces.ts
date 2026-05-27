@@ -34,6 +34,7 @@ export interface ThemeLinkConfig {
 
   // Social networks
   linkedin?: string;
+  github?: string;
   youtube?: string;
   twitter?: string;
 

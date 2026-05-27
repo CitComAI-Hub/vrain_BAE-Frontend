@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  faGithub,
   faLinkedin,
   faXTwitter,
   faYoutube,
@@ -10,6 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ThemeService } from 'src/app/services/theme.service';
+import { environment } from 'src/environments/environment';
 import { EventMessageService } from '../../services/event-message.service';
 import { NavHeaderLink, NavLink } from '../../themes';
 
@@ -21,6 +23,7 @@ import { NavHeaderLink, NavLink } from '../../themes';
 })
 export class FooterComponent implements OnInit, OnDestroy {
   protected readonly faLinkedin = faLinkedin;
+  protected readonly faGithub = faGithub;
   protected readonly faYoutube = faYoutube;
   protected readonly faXTwitter = faXTwitter;
   private unSub = new Subject();
@@ -32,6 +35,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   socialLinks: { icon: any; url: string }[] = [];
   footerLinks: NavHeaderLink[] = [];
   defaultFooterLinks: NavLink[] = [];
+  marketplaceLinks: { label: string; url: string; isRouterLink: boolean }[] = [
+    { label: 'Browse', url: '/search', isRouterLink: true },
+    { label: 'Register', url: environment.REGISTRATION_FORM_URL, isRouterLink: false },
+    { label: 'Login', url: `${environment.BASE_URL}/login`, isRouterLink: false },
+  ];
+  marketplaceSocialLinks: { label: string; url: string; icon: any }[] = [];
   columns: number;
 
   constructor(
@@ -75,11 +84,24 @@ export class FooterComponent implements OnInit, OnDestroy {
         this.columns = theme?.links?.footerLinksColsNumber || 0;
 
         this.socialLinks = [];
+        this.marketplaceSocialLinks = [];
 
         if (theme?.links?.linkedin) {
           this.socialLinks.push({
             url: theme.links.linkedin,
             icon: this.faLinkedin,
+          });
+          this.marketplaceSocialLinks.push({
+            label: 'LinkedIn',
+            url: theme.links.linkedin,
+            icon: this.faLinkedin,
+          });
+        }
+        if ((theme?.links as any)?.github) {
+          this.marketplaceSocialLinks.push({
+            label: 'GitHub',
+            url: (theme?.links as any).github,
+            icon: this.faGithub,
           });
         }
         if (theme?.links?.twitter) {
