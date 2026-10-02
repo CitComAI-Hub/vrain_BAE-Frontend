@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {EventMessageService} from "../../services/event-message.service";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import {Category} from "../../models/interfaces";
-import {LocalStorageService} from "../../services/local-storage.service";
-import { ApiServiceService } from 'src/app/services/product-service.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownModule } from 'ngx-markdown';
+import { ApiServiceService } from 'src/app/services/product-service.service';
+import { Category } from "../../models/interfaces";
+import { EventMessageService } from "../../services/event-message.service";
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
   selector: 'bae-off-featured',
@@ -16,27 +16,41 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [CommonModule, TranslateModule, MarkdownModule]
 })
 export class FeaturedComponent implements OnInit {
-  categories:any[]=[];
+  categories: any[] = [];
+  @Input() searchTerm = '';
+
+  get filteredCategories(): any[] {
+    const normalizedTerm = this.searchTerm.trim().toLowerCase();
+    if (!normalizedTerm) {
+      return this.categories;
+    }
+
+    return this.categories.filter((cat) => {
+      const name = (cat?.name || '').toLowerCase();
+      const description = (cat?.description || '').toLowerCase();
+      return name.includes(normalizedTerm) || description.includes(normalizedTerm);
+    });
+  }
 
   constructor(
     private eventMessage: EventMessageService,
     private localStorage: LocalStorageService,
     private router: Router,
     private api: ApiServiceService
-    ) {
-    }
+  ) {
+  }
 
   ngOnInit(): void {
     this.api.getDefaultCategories().then(data => {
-      for(let i=0; i < data.length; i++){
-        if(data[i].isRoot==true){
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].isRoot == true) {
           this.categories.push(data[i])
         }
       }
     })
   }
 
-  searchByCategory(cat:Category){
+  searchByCategory(cat: Category) {
     //MOCKED CATEGORY
     //TO-DO CHANGE THIS TO MATCH ALL THE CATEGORIES ON THE LIST
     /*const cat = {
@@ -55,6 +69,6 @@ export class FeaturedComponent implements OnInit {
     this.localStorage.addCategoryFilter(cat);
     this.eventMessage.emitAddedFilter(cat);
     this.router.navigate(['/search']);
-    
+
   }
 }

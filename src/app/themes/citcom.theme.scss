@@ -1,24 +1,47 @@
 body.theme-citcom {
-  /* HEX: #007BFF - Vibrant Blue */
-  --theme-primary-50: 0 123 255;
-  /* HEX: #0056b3 - Deep Primary */
-  --theme-primary-100: 0 86 179;
+  /* HEX: #11899A - Accent Teal */
+  --theme-primary-50: 17 137 154;
+  /* HEX: #1F242C - Charcoal */
+  --theme-primary-100: 31 36 44;
 
-  /* HEX: #e7f1ff - Very Light Blue Mist */
-  --theme-secondary-50: 231 241 255;
-  /* HEX: #1a3a5a - Dark Slate Blue */
-  --theme-secondary-100: 26 58 90;
-  /* HEX: #102a43 - Deep Navy */
-  --theme-secondary-200: 16 42 67;
-  /* HEX: #243b53 - Steel Blue */
-  --theme-secondary-300: 36 59 83;
-  /* HEX: #0a2540 - Rich Midnight */
-  --theme-secondary-400: 10 37 64;
-  /* HEX: #1b262d - Dark Gray-Blue */
-  --theme-secondary-500: 27 38 45;
+  /* HEX: #F3F4F6 - Light Neutral Grey */
+  --theme-secondary-50: 243 244 246;
+  /* HEX: #1C2430 - Dark Slate */
+  --theme-secondary-100: 28 36 48;
+  /* HEX: #151B24 - Deep Slate */
+  --theme-secondary-200: 21 27 36;
+  /* HEX: #252E3B - Steel Slate */
+  --theme-secondary-300: 37 46 59;
+  /* HEX: #10151C - Rich Black */
+  --theme-secondary-400: 16 21 28;
+  /* HEX: #1B2330 - Dark Gray-Blue */
+  --theme-secondary-500: 27 35 48;
 
-  /* BG COLOR - Deep Charcoal Blue */
-  --theme-tertiary-50: 20 26 31;
-  /* CARD/MODAL BG COLOR - Dark Navy Grey */
-  --theme-tertiary-100: 27 38 45;
+  /* BG COLOR - Deep Charcoal */
+  --theme-tertiary-50: 20 24 30;
+  /* CARD/MODAL BG COLOR - Dark Slate Grey */
+  --theme-tertiary-100: 28 34 42;
+
+  /* Fonts */
+  --theme-font-display: "Barlow";
+  --theme-font-body: "Barlow";
+
+  /* Header */
+  --theme-header-v2-top-bg: #ffffff;
+  --theme-header-v2-glass-bg: rgba(255, 255, 255, 0.86);
+  --theme-header-v2-solid-bg: #1f242c;
+  --theme-header-v2-solid-hover-bg: #000000;
+  --theme-header-v2-outline-border: #1f242c;
+  --theme-header-v2-outline-hover-bg: #1f242c;
+  --theme-header-v2-outline-hover-text: #ffffff;
+
+  font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body.theme-citcom markdown {
+  font-family: inherit;
+}
+
+body.theme-citcom .mk-page-hero {
+  background-image: url("/assets/themes/citcom/onboarding-hero.webp");
 }

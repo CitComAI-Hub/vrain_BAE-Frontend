@@ -60,6 +60,7 @@ export class SearchCatalogComponent implements OnInit, OnDestroy{
 
   id:any;
   catalog:any;
+  defaultLogo = 'assets/themes/citcom/logo-citcom.png';
   providerName:string='';
   providerDescription:string='';
   products: ProductOffering[]=[];
@@ -96,7 +97,7 @@ export class SearchCatalogComponent implements OnInit, OnDestroy{
           const provdesc = info.partyCharacteristic.find((item: { name: string; }) => item.name === 'description')
           this.providerDescription=provdesc.value;
         })
-        this.logo='assets/images/Dome-Marketplace.svg';
+        this.logo=this.defaultLogo;
       } else {
         this.accService.getOrgInfo(owner.id).then(info  => {
           console.log('info')
@@ -113,10 +114,10 @@ export class SearchCatalogComponent implements OnInit, OnDestroy{
             if(logo?.value){
               this.logo=logo.value
             } else {
-              this.logo='assets/images/Dome-Marketplace.svg'
+              this.logo=this.defaultLogo
             }
           } else {
-            this.logo='assets/images/Dome-Marketplace.svg'
+            this.logo=this.defaultLogo
           }
         })
       }      

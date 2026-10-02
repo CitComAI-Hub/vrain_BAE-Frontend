@@ -1,5 +1,12 @@
-<bae-categories-panel class="fixed z-30 w-full top-[72px] transition transform opacity-0 duration-200" [ngClass]="showPanel ? 'opacity-100' : 'hidden'"></bae-categories-panel>
-<section class="flex p-5" [ngClass]="showPanel ? 'pt-[75px]' : ''">
+<bae-categories-panel class="fixed z-30 w-full top-[88px] transition transform opacity-0 duration-200" [ngClass]="showPanel ? 'opacity-100' : 'hidden'"></bae-categories-panel>
+<div class="mk-page">
+<div class="mk-shell" [ngClass]="showPanel ? 'pt-[75px]' : ''">
+<section class="mk-page-hero mb-8">
+  <p class="mk-eyebrow">Marketplace</p>
+  <h1 class="mk-title">{{ 'HEADER._services' | translate }}</h1>
+  <p class="mk-subtitle">Explore verified data and AI services published by providers across the CitCom.ai ecosystem. Search by keyword or narrow the results by category.</p>
+</section>
+<section class="flex gap-6">
   @if(showDrawer){
     <div (click)="$event.stopPropagation();" [ngClass]="showDrawer ? 'backdrop-blur-sm': ''" class="fixed h-screen w-3/4 top-0 left-0 z-50 p-4 overflow-y-auto bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
       <button type="button" (click)="showDrawer=!showDrawer" aria-controls="drawer-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -11,12 +18,12 @@
       <bae-categories-filter [catalogId]="DFT_CATALOG"></bae-categories-filter>
     </div>
   } @else {
-    <bae-categories-filter [catalogId]="DFT_CATALOG" class="hidden md:block w-1/5 md:w-2/4 lg:w-1/4"></bae-categories-filter>
+    <bae-categories-filter [catalogId]="DFT_CATALOG" class="mk-card hidden md:block h-fit p-4 w-1/5 md:w-2/4 lg:w-1/4"></bae-categories-filter>
   }
 
   <div class="flex flex-col w-full md:w-4/5 lg:w-3/4">
-    <section class="md:pl-5 content pb-5 px-4 flex flex-col">
-      <div class="flex items-center mb-4">
+    <section class="mk-card content p-4 mb-6 flex flex-col">
+      <div class="flex items-center md:hidden mb-4">
         <button (click)="showDrawer=!showDrawer;$event.stopPropagation();" type="button" class="md:hidden px-2 w-fit h-fit py-2 text-sm font-medium text-center inline-flex items-center dark:text-white bg-white text-primary-100 border border-primary-100 rounded-lg dark:bg-primary-100 dark:border-secondary-200">
           <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -38,12 +45,12 @@
             }
             <input type="search" id="search" [formControl]="searchField"
             (keydown.enter)="onUnifiedSearch($event)"
-            [ngClass]="aiSearchEnabled ? 'ps-10 border-purple-300 focus:ring-purple-500 focus:border-purple-500 dark:border-purple-600 dark:focus:border-purple-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-s-gray-700 dark:border-gray-600 dark:focus:border-blue-500'"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg dark:bg-secondary-500 dark:placeholder-gray-400 dark:text-white"
+            [ngClass]="aiSearchEnabled ? 'ps-10 border-purple-300 focus:ring-purple-500 focus:border-purple-500 dark:border-purple-600 dark:focus:border-purple-500' : 'border-gray-300 focus:ring-primary-100/10 focus:border-primary-100 dark:border-gray-600 dark:focus:border-white'"
+            class="block px-4 py-3 pe-14 w-full text-sm text-gray-900 bg-white rounded-lg dark:bg-secondary-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="{{ aiSearchEnabled ? ('DASHBOARD._ai_search_ph' | translate) : ('DASHBOARD._search_ph' | translate) }}">
             <button type="submit"
-            [ngClass]="aiSearchEnabled ? 'bg-purple-600 border-purple-600 hover:bg-purple-700 focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800' : 'bg-primary-100 border-secondary-100 hover:bg-primary-50 focus:ring-blue-300 dark:border-secondary-400'"
-            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg border focus:ring-4 focus:outline-none">
+            [ngClass]="aiSearchEnabled ? 'bg-purple-600 border-purple-600 hover:bg-purple-700 focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800' : 'bg-primary-100 border-primary-100 hover:bg-black focus:ring-gray-300 dark:border-secondary-400'"
+            class="absolute top-0 end-0 w-12 inline-flex items-center justify-center text-sm font-medium h-full text-white rounded-lg border focus:ring-4 focus:outline-none">
               @if(aiSearchLoading){
                 <svg class="w-4 h-4 animate-spin" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -133,7 +140,7 @@
               @if ($index + 1 === aiCurrentPage || $index + 1 === 1 || $index + 1 === aiTotalPages || ($index + 1 >= aiCurrentPage - 2 && $index + 1 <= aiCurrentPage + 2)) {
                 <li>
                   <button (click)="changeAiPage($index + 1)"
-                    [ngClass]="$index + 1 === aiCurrentPage ? 'text-blue-600 border-blue-300 bg-blue-50 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'"
+                    [ngClass]="$index + 1 === aiCurrentPage ? 'text-white border-primary-100 bg-primary-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'"
                     class="flex items-center justify-center px-3 h-8 leading-tight border">
                     {{ $index + 1 }}
                   </button>
@@ -154,11 +161,11 @@
         </nav>
       }
 
-      <div class="md:pl-5 grid grid-cols-1 place-items-center lg:grid-cols-2 xl:grid-cols-3">
+      <div class="grid grid-cols-1 place-items-center lg:grid-cols-2 xl:grid-cols-3 -m-2">
         @for (prod of products; track prod.id; let index = $index) {
           <bae-off-card data-cy="baeCard" [productOff]=prod [cardId]="index" class="w-full h-full p-2"></bae-off-card>
         } @empty {
-          <div data-cy="searchNoOffersFound" class="min-h-19 dark:text-gray-600 text-center">{{ 'DASHBOARD._not_found' | translate }}</div>
+          <div data-cy="searchNoOffersFound" class="mk-card col-span-full w-full py-10 text-gray-500 text-center">{{ 'DASHBOARD._not_found' | translate }}</div>
         }
       </div>
 
@@ -176,7 +183,7 @@
               @if ($index + 1 === aiCurrentPage || $index + 1 === 1 || $index + 1 === aiTotalPages || ($index + 1 >= aiCurrentPage - 2 && $index + 1 <= aiCurrentPage + 2)) {
                 <li>
                   <button (click)="changeAiPage($index + 1)"
-                    [ngClass]="$index + 1 === aiCurrentPage ? 'text-blue-600 border-blue-300 bg-blue-50 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'"
+                    [ngClass]="$index + 1 === aiCurrentPage ? 'text-white border-primary-100 bg-primary-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'"
                     class="flex items-center justify-center px-3 h-8 leading-tight border">
                     {{ $index + 1 }}
                   </button>
@@ -201,8 +208,8 @@
       @if (!aiSearchEnabled) {
         @if (!loading_more) {
           @if (page_check) {
-            <div class="flex pb-12 justify-center align-middle">
-              <button data-cy="loadMore" (click)="next()" class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <div class="flex pt-8 justify-center align-middle">
+              <button data-cy="loadMore" (click)="next()" class="mk-btn-outline">
                 Load more
                 <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -224,11 +231,13 @@
   </div>
 
 </section>
+</div>
+</div>
 
 @if(feedback){
   <feedback-modal 
-  rateMessage="Based on your recent experience, how likely are you to recommend DOME to a colleague or a partner?"
-  writeMessage="How can we improve DOME?"
+  rateMessage="Based on your recent experience, how likely are you to recommend CitCom.ai to a colleague or a partner?"
+  writeMessage="How can we improve CitCom.ai?"
   type="campaign"
   class="fixed inset-0 flex items-center justify-center z-40"></feedback-modal>
 }

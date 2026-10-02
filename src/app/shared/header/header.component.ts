@@ -110,6 +110,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   private themeSubscription: Subscription = new Subscription();
   private destroy$ = new Subject<void>();
 
+  get isLightHeader(): boolean {
+    return this.currentTheme?.name === 'CITCOM';
+  }
+
   @HostListener('window:scroll')
   onScroll() {
     this.scrolled = window.scrollY > 10;

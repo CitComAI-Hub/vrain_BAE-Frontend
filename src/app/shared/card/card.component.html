@@ -1,7 +1,7 @@
-<div class="flex flex-col w-full h-full bg-secondary-50 dark:bg-secondary-100 rounded-lg dark:border-secondary-100 border-secondary-50 border">
+<div class="mk-card mk-card-hover flex flex-col w-full h-full overflow-hidden">
 
 
-  <div (click)="goToProductDetails(productOff)" class="rounded-t overflow-hidden cursor-pointer">
+  <div (click)="goToProductDetails(productOff)" class="rounded-t-2xl overflow-hidden cursor-pointer border-b border-gray-200">
     <div class="relative h-48 flex justify-center items-center">
       <!-- Imagen de fondo difuminada -->
       <!--<div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-color: {{bgColor}};"></div>-->
@@ -12,8 +12,8 @@
     </div>
   </div>
 
-  <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 bg-blend-multiply rounded-lg" [style.background-image]="'url(' + currentTheme?.assets?.cardDefaultBgUrl + ')'">
-    <div class="flex-1 h-full px-5 py-5 bg-secondary-50/95 dark:bg-tertiary-100/95 rounded-b-lg">
+  <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 bg-blend-multiply rounded-b-2xl" [style.background-image]="'url(' + currentTheme?.assets?.cardDefaultBgUrl + ')'">
+    <div class="flex-1 h-full px-5 py-5 bg-white/95 rounded-b-2xl">
       <div data-cy="searchOfferCategories" class="flex items-center flex-wrap overflow-y-hidden overflow-x-hidden align-middle">
         <!--<a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
         [ngClass]="complianceLevel == 'NL' ? 'bg-red-200 text-red-700' : complianceLevel == 'BL' ? 'bg-orange-200 text-orange-700' : complianceLevel == 'P' ? 'bg-yellow-200 text-yellow-700' : 'bg-green-200 text-green-700'">
@@ -47,9 +47,9 @@
           'break-all': hasLongWord(productOff?.name, 20),
           'break-words': !hasLongWord(productOff?.name, 20)
         }"
-        class="text-xl font-semibold line-clamp-2 tracking-tight text-primary-100 dark:text-white text-wrap break-words">{{productOff?.name}}</h5>
+        class="text-xl font-bold leading-tight line-clamp-2 tracking-tight text-primary-100 text-wrap break-words">{{productOff?.name}}</h5>
       </a>
-      <markdown data-cy="searchOfferDescription" class="min-h-19 h-19 line-clamp-2 text-gray-600 dark:text-gray-400" [data]="productOff?.description"></markdown>
+      <markdown data-cy="searchOfferDescription" class="mt-1 min-h-19 h-19 line-clamp-2 text-sm text-gray-600" [data]="productOff?.description"></markdown>
       <!--<div class="flex w-full justify-between mt-2.5 mb-5 text-gray-500 font-mono">
         <div>V: {{productOff?.version || 'latest'}}</div>
         <div class="flex items-center">
@@ -74,7 +74,7 @@
 
       <div class="flex sticky top-[100vh] items-center justify-center align-items-bottom rounded-lg mt-4">
 
-        <button data-cy="searchViewDetails" (click)="toggleDetailsModal();$event.stopPropagation();"  type="button" class="flex items-center align-items-bottom text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-100 dark:hover:bg-primary-50 dark:focus:ring-primary-100 mr-1">
+        <button data-cy="searchViewDetails" (click)="toggleDetailsModal();$event.stopPropagation();"  type="button" class="flex items-center align-items-bottom text-white bg-primary-100 hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition-colors mr-1">
           <svg class="w-[18px] h-[18px] text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
             <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>

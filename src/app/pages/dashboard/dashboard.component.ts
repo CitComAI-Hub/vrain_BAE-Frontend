@@ -55,6 +55,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isFilterPanelShown = false;
   searchField = new FormControl();
   searchEnabled = environment.SEARCH_ENABLED;
+  catalogSearchTerm = '';
+
+  benefits = [
+    {
+      title: 'Trust by Design',
+      text: 'Every provider joins with a verifiable, credential-based identity, so you always know who stands behind each offering and under which conditions it is shared.'
+    },
+    {
+      title: 'Compliance Readiness',
+      text: 'Offerings carry explicit usage policies and terms, helping you align data sharing and AI adoption with European legal and governance requirements from day one.'
+    },
+    {
+      title: 'Faster Collaboration',
+      text: 'Once approved, your organization can publish its own services or reuse others\' to launch data-driven pilots with cities, companies and researchers across Europe.'
+    }
+  ];
 
   domeRegister: string = environment.DOME_REGISTER_LINK;
 
@@ -200,11 +216,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   filterSearch(event: Event) {
     event.preventDefault();
-    if (this.searchField.value != '' && this.searchField.value != null) {
-      this.router.navigate(['/search', { keywords: this.searchField.value }]);
-    } else {
-      this.router.navigate(['/search']);
-    }
+    this.catalogSearchTerm = (this.searchField.value ?? '').toString().trim();
+  }
+
+  onSearchInput() {
+    this.catalogSearchTerm = (this.searchField.value ?? '').toString().trim();
   }
 
   hasLongWord(str: string | undefined, threshold = 20) {
