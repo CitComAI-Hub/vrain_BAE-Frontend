@@ -35,6 +35,12 @@ body.theme-citcom {
   --theme-header-v2-outline-hover-bg: #1f242c;
   --theme-header-v2-outline-hover-text: #ffffff;
 
+  /* Marketplace accents (AA contrast on white: accent, accent-ink) */
+  --mk-accent: #0e7480;
+  --mk-accent-bright: #3cc3cf;
+  --mk-accent-tint: #e6f4f5;
+  --mk-accent-ink: #0b5f69;
+
   font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 

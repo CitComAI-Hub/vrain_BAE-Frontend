@@ -1,0 +1,115 @@
+/* CitCom landing: search card overlapping the hero (tokens live in dashboard.onboarding.component.css) */
+/* ===== Search band ===== */
+.ob-search-band {
+  position: relative;
+  margin-top: -72px;
+}
+
+.ob-search-card {
+  padding: 28px 32px;
+  border-radius: 20px;
+  border: 1px solid var(--ob-border);
+  background: #ffffff;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+  animation: ob-slide-up 520ms 120ms ease both;
+}
+
+.ob-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.ob-search-label {
+  font-family: var(--ob-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ob-ink);
+}
+
+.ob-search-inner {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 6px 6px 6px 18px;
+  border-radius: 12px;
+  border: 1px solid #c9d0d8;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ob-search-inner:focus-within {
+  border-color: var(--ob-ink);
+  box-shadow: 0 0 0 3px rgba(31, 36, 44, 0.1);
+}
+
+.ob-search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--ob-caption);
+}
+
+.ob-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--ob-ink);
+  font-size: 1rem;
+}
+
+.ob-search-input:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ob-search-btn {
+  min-height: 44px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ob-ink);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ob-search-btn:hover {
+  background: #000000;
+}
+
+.ob-search-hint {
+  margin: 12px 0 0;
+  font-size: 0.875rem;
+  color: var(--ob-caption);
+}
+
+.ob-search-btn:focus-visible {
+  outline: 3px solid var(--ob-accent-bright);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-search-card {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {  .ob-search-card {
+    padding: 20px;
+  }
+
+  .ob-search-inner {
+    flex-basis: 100%;
+    padding-left: 12px;
+  }
+}

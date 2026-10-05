@@ -1,0 +1,27 @@
+<header class="acc-head">
+  <div class="acc-head-inner">
+    <div class="acc-head-copy">
+      <nav aria-label="Breadcrumb" class="acc-breadcrumb">
+        <a routerLink="/dashboard">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="acc-breadcrumb-current">{{ title }}</span>
+      </nav>
+      <h1 class="acc-title">{{ title }}</h1>
+      @if (subtitle) {
+      <p class="acc-subtitle">{{ subtitle }}</p>
+      }
+    </div>
+
+    @if (sessionName) {
+    <div class="acc-session">
+      <span class="acc-session-avatar" [class.acc-session-avatar--org]="actingAsOrg" aria-hidden="true">
+        {{ sessionInitials }}
+      </span>
+      <span class="acc-session-text">
+        <span class="acc-session-label">Acting as</span>
+        <span class="acc-session-name">{{ sessionName }}</span>
+      </span>
+    </div>
+    }
+  </div>
+</header>

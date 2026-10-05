@@ -59,7 +59,14 @@ export class AppInitService {
             },
             complete: () => {}
         }
-        this.http.get<any>(`${environment.BASE_URL}/config`).subscribe(obs);
+        // If the backend /config is unreachable, fall back to a local config so the UI can still render
+        this.http.get<any>(`${environment.BASE_URL}/config`).subscribe({
+            next: (config) => obs.next(config),
+            error: (error) => {
+                console.warn('AppInitService: /config not available, using assets/config.json', error);
+                this.http.get<any>('assets/config.json').subscribe(obs);
+            }
+        });
     });
   }
 }

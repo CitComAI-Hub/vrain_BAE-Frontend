@@ -48,6 +48,13 @@ export class ThemeService {
     }
   }
 
+  // Themes designed only for light mode drop the 'dark' class that index.html may have added
+  private applyThemeColorScheme(theme: ThemeConfig): void {
+    if (theme.forceLightMode && isPlatformBrowser(this.platformId) && this.document?.documentElement) {
+      this.renderer.removeClass(this.document.documentElement, 'dark');
+    }
+  }
+
   private applyThemeBrowserMetadata(theme: ThemeConfig): void {
     if (!isPlatformBrowser(this.platformId) || !this.document) {
       return;
@@ -105,6 +112,7 @@ export class ThemeService {
       // Si ya hay un tema aplicado y es diferente, quitar la clase vieja.
       const oldTheme = this.currentThemeSubject.value;
       this.applyThemeClassToBody(themeToApply.name, oldTheme?.name);
+      this.applyThemeColorScheme(themeToApply);
       this.applyThemeBrowserMetadata(themeToApply);
       this.currentThemeSubject.next(themeToApply);
 

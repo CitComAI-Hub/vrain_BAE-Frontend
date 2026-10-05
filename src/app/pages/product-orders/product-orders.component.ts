@@ -21,13 +21,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OrderInfoComponent } from "./sections/order-info/order-info.component";
 import { InvoicesInfoComponent } from "./sections/invoices-info/invoices-info.component";
+import { AccountHeaderComponent } from "src/app/shared/account-header/account-header.component";
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-orders',
   standalone: true,
-  imports: [TranslateModule, FontAwesomeModule, CommonModule, OrderInfoComponent, InvoicesInfoComponent],
+  imports: [TranslateModule, FontAwesomeModule, CommonModule, OrderInfoComponent, InvoicesInfoComponent, AccountHeaderComponent],
   providers: [DatePipe],
   templateUrl: './product-orders.component.html',
   styleUrl: './product-orders.component.css'

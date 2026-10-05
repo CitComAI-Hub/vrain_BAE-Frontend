@@ -1,74 +1,49 @@
-<div class="container mx-auto pt-2 pb-8">
-    <h1 class="hidden lg:block mb-8 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white w-full">
-      <span class="underline underline-offset-3 decoration-8 decoration-primary-100 dark:decoration-primary-100">{{ 'ADMIN._admin' | translate }}</span>
-    </h1>
-    <div class="flex flex-cols mr-2 ml-2 lg:hidden">
-      <h1 class="mb-8 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 lg:text-4xl lg:text-5xl dark:text-white w-full"><span class="underline underline-offset-3 decoration-8 decoration-primary-100 dark:decoration-primary-100">My offerings</span></h1>
-      <div class="flex align-middle content-center items-center">
-        <button id="dropdown-nav" data-dropdown-toggle="dropdown-nav-content" 
-        class="text-black dark:text-white h-fit w-fit justify-between shadow bg-white dark:bg-secondary-200 hover:bg-gray-100 dark:hover:bg-secondary-300 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg"
-        type="button">
-        <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-        Administration
-      </button>
-      </div>
-  
-    </div>
-    <!-- Dropdown menu -->
-    <div id="dropdown-nav-content" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-nav">
-        <li>
-          <a (click)="goToCategories()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'ADMIN._categories' | translate }}</a>
-        </li>
-        <li>
-          <a (click)="goToVerification()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'ADMIN._verification' | translate }}</a>
-        </li>
-        <li>
-          <a (click)="goToRevenue()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'ADMIN._revenue' | translate }}</a>
-        </li>
-        <li>
-          <a (click)="goToEmail()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'ADMIN._email' | translate }}</a>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="w-full grid lg:grid-cols-20/80">
-        <div class="hidden lg:block">
-          <div class="w-48 h-fit text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-8">
-            <button (click)="goToCategories()" id="categories-button" aria-current="true" class="block w-full px-4 py-2 text-white bg-primary-100 border-b border-gray-200 rounded-t-lg cursor-pointer dark:border-gray-600 hover:bg-gray-100 hover:text-secondary-400 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-              {{ 'ADMIN._categories' | translate }}
-            </button>
-            <button (click)="goToVerification()" id="verify-button" class="block w-full px-4 py-2 border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-secondary-400 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-              {{ 'ADMIN._verification' | translate }}
-            </button>
-            <button (click)="goToRevenue()" id="revenue-button" class="block w-full px-4 py-2 border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-secondary-400 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-              {{ 'ADMIN._revenue' | translate }}
-            </button>
-            <button (click)="goToEmail()" id="email-button" class="block w-full px-4 py-2 border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-secondary-400 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-              {{ 'ADMIN._email' | translate }}
-            </button>
-          </div>
-       </div>
+<div class="acc-page">
+  <app-account-header [title]="'ADMIN._admin' | translate"
+    subtitle="Manage categories, verification, revenue sharing and email settings."></app-account-header>
 
-        @if(show_categories){
-          <admin-categories></admin-categories>
-        }
-        @if(show_create_categories){
-          <create-category></create-category>
-        }
-        @if(show_update_categories){
-          <update-category [category]="category_to_update"></update-category>
-        }
-        @if(show_verification){
-          <verification></verification>
-        }
-        @if(show_revenue){
-          <operator-revenue-sharing></operator-revenue-sharing>
-        }
-        @if(show_email){
-          <email></email>
-        }
+  <div class="acc-layout">
+    <aside class="acc-aside">
+      <nav class="acc-nav" aria-label="Administration sections">
+        <p class="acc-nav-label">Administration</p>
+        <button (click)="goToCategories()" id="categories-button" type="button" class="acc-nav-item text-white bg-primary-100">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9-9-9Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          {{ 'ADMIN._categories' | translate }}
+        </button>
+        <button (click)="goToVerification()" id="verify-button" type="button" class="acc-nav-item">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4.2 3 7.6 7 9 4-1.4 7-4.8 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          {{ 'ADMIN._verification' | translate }}
+        </button>
+        <button (click)="goToRevenue()" id="revenue-button" type="button" class="acc-nav-item">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>
+          {{ 'ADMIN._revenue' | translate }}
+        </button>
+        <button (click)="goToEmail()" id="email-button" type="button" class="acc-nav-item">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          {{ 'ADMIN._email' | translate }}
+        </button>
+      </nav>
+    </aside>
+
+    <div class="acc-main">
+      @if(show_categories){
+      <admin-categories></admin-categories>
+      }
+      @if(show_create_categories){
+      <create-category></create-category>
+      }
+      @if(show_update_categories){
+      <update-category [category]="category_to_update"></update-category>
+      }
+      @if(show_verification){
+      <verification></verification>
+      }
+      @if(show_revenue){
+      <operator-revenue-sharing></operator-revenue-sharing>
+      }
+      @if(show_email){
+      <email></email>
+      }
     </div>
+  </div>
 </div>

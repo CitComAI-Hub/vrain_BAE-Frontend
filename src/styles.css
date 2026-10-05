@@ -377,3 +377,337 @@ textarea:-webkit-autofill::first-line {
     border-radius: 16px;
   }
 }
+
+/* ===== Signed-in area (profile, offerings, orders, inventory, admin...) ===== */
+body {
+  --mk-accent: rgb(var(--theme-primary-50));
+  --mk-accent-bright: rgb(var(--theme-primary-50));
+  --mk-accent-tint: rgb(var(--theme-primary-50) / 0.12);
+  --mk-accent-ink: rgb(var(--theme-primary-100));
+}
+
+.acc-page {
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #1f242c;
+}
+
+.acc-head {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.acc-head-inner {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 28px 16px 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.acc-head-copy {
+  min-width: 0;
+}
+
+.acc-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: #5b6472;
+}
+
+.acc-breadcrumb a {
+  color: #5b6472;
+  text-decoration: none;
+}
+
+.acc-breadcrumb a:hover {
+  color: #1f242c;
+  text-decoration: underline;
+}
+
+.acc-breadcrumb-current {
+  font-weight: 600;
+  color: #1f242c;
+}
+
+.acc-title {
+  margin: 10px 0 0;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #1f242c;
+}
+
+.acc-subtitle {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.acc-session {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  padding: 8px 14px 8px 8px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f7f8fa;
+}
+
+.acc-session-avatar {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--mk-accent);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.acc-session-avatar--org {
+  background: rgb(var(--theme-primary-100));
+  color: var(--mk-accent-bright);
+}
+
+.acc-session-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.acc-session-label {
+  font-size: 0.75rem;
+  color: #5b6472;
+}
+
+.acc-session-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acc-layout {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.acc-aside {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acc-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.acc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.acc-nav-label {
+  margin: 8px 12px 6px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5b6472;
+}
+
+.acc-nav-label:not(:first-child) {
+  margin-top: 14px;
+}
+
+/* Active state comes from the existing 'text-white bg-primary-100' toggled by each page,
+   so the base item lives in the components layer and those utilities win over it */
+@layer components {
+  .acc-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: 10px;
+    color: #1f242c;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+}
+
+.acc-nav-item:not(.bg-primary-100):hover {
+  background: #f3f4f6;
+}
+
+.acc-nav-item:focus-visible {
+  outline: 3px solid var(--mk-accent);
+  outline-offset: 2px;
+}
+
+.acc-nav-icon {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: #5b6472;
+}
+
+.acc-nav-item.bg-primary-100 .acc-nav-icon {
+  color: var(--mk-accent-bright);
+}
+
+.acc-nav-ext {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+}
+
+.acc-help {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.acc-help-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.acc-help-steps {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.acc-help-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acc-help-step {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--mk-accent-tint);
+  color: var(--mk-accent-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Below lg: the side menu becomes a scrollable tab bar */
+@media (max-width: 1023px) {
+  .acc-layout {
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 16px;
+  }
+
+  .acc-aside {
+    flex: none;
+  }
+
+  .acc-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 6px;
+    scrollbar-width: thin;
+  }
+
+  .acc-nav-label,
+  .acc-help {
+    display: none;
+  }
+
+  .acc-nav-item {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Sections rendered inside the signed-in area: lighter cards and tables */
+.acc-main .bg-secondary-50 {
+  background-color: #ffffff;
+}
+
+.acc-main .border-secondary-50 {
+  border-color: #e5e7eb;
+}
+
+.acc-main .bg-secondary-50.rounded-lg {
+  border-radius: 16px;
+}
+
+.acc-main .shadow-lg,
+.acc-main .shadow-md {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.acc-main table {
+  color: #374151;
+}
+
+.acc-main table thead {
+  background: #f9fafb;
+  color: #5b6472;
+  letter-spacing: 0.06em;
+}
+
+.acc-main table thead th {
+  font-weight: 700;
+}
+
+.acc-main table tbody tr {
+  border-color: #eef0f3;
+}
+
+.acc-main table tbody tr:hover {
+  background-color: #f9fafb;
+}

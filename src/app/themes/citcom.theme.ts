@@ -32,5 +32,6 @@ export const CITCOM_THEME_CONFIG: ThemeConfig = {
   dashboard: {
     showFeaturedOfferings: true,
     showPlatformBenefits: false,
-  }
+  },
+  forceLightMode: true
 };

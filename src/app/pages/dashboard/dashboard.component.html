@@ -21,121 +21,224 @@
 </div>
 } @else {
 <div class="ob-page">
-  <section class="ob-shell">
-    <div class="ob-hero-grid">
-      <article class="ob-hero-panel" style="background-image: url(assets/themes/citcom/onboarding-hero.webp)">
-        <div class="ob-hero-copy" data-cy="mainText">
-          <h1 class="ob-title">{{ 'DASHBOARD._header' | translate }}</h1>
-          <p class="ob-subtitle">{{ 'DASHBOARD._subheader' | translate }}</p>
 
-          <div class="ob-primary-actions">
-            <button data-cy="browseServicesDashboard" id="browseServices" (click)="goToSearch()"
-              class="ob-btn ob-btn-outline-light" type="button">
-              <svg class="ob-btn-icon" fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 10h14m0 0-5-5m5 5-5 5" />
-              </svg>
-              {{ 'DASHBOARD._browse_serv' | translate }}
-            </button>
+  <!-- ===== Hero ===== -->
+  <section class="ob-hero" [class.ob-hero--with-search]="searchEnabled">
+    <div class="ob-shell ob-hero-grid">
+      <div class="ob-hero-copy" data-cy="mainText">
+        <p class="ob-eyebrow"><span class="ob-eyebrow-line" aria-hidden="true"></span>CitCom.ai Marketplace</p>
+        <h1 class="ob-title">{{ 'DASHBOARD._header' | translate }}</h1>
+        <p class="ob-subtitle">{{ 'DASHBOARD._subheader' | translate }}</p>
 
-            <a [href]="customersLink" target="_blank" rel="noreferrer" class="ob-link-ghost">
-              Visit Project Website
-            </a>
+        <div class="ob-actions">
+          <button data-cy="browseServicesDashboard" id="browseServices" (click)="goToSearch()"
+            class="ob-btn ob-btn-accent" type="button">
+            {{ 'DASHBOARD._browse_serv' | translate }}
+            <svg class="ob-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+
+          <a data-cy="publishOff" id="registerHere" [href]="domeRegister" target="_blank" rel="noreferrer"
+            class="ob-btn ob-btn-ghost-light">
+            {{ 'HEADER._register_here' | translate }}
+          </a>
+
+          <a [href]="customersLink" target="_blank" rel="noreferrer" class="ob-link-light">
+            Visit project website
+            <svg class="ob-icon ob-icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="ob-hero-media">
+        <img class="ob-hero-img" src="assets/themes/citcom/onboarding-hero.webp" alt="" />
+
+        <div class="ob-stats" aria-label="Marketplace metrics">
+          <div class="ob-stat">
+            <p data-cy="vServices" class="ob-stat-value">
+              <span class="ob-stat-number">{{ services.length }}</span> verified services
+            </p>
+            @for (serv of services; track serv; let pos = $index) {
+            @if (currentIndexServ === pos) {
+            <p data-cy="nameServices" [class.break-all]="hasLongWord(serv, 20)"
+              [class.break-words]="!hasLongWord(serv, 20)" class="ob-stat-tag" [title]="serv">
+              {{ serv }}
+            </p>
+            }
+            }
+          </div>
+
+          <div class="ob-stat">
+            <p data-cy="rPublishers" class="ob-stat-value">
+              <span class="ob-stat-number">{{ publishers.length }}</span> registered providers
+            </p>
+            @for (pub of publishers; track pub; let pos = $index) {
+            @if (currentIndexPub === pos) {
+            <p data-cy="nameOrgs" [class.break-all]="hasLongWord(pub, 20)" [class.break-words]="!hasLongWord(pub, 20)"
+              class="ob-stat-tag" [title]="pub">
+              {{ pub }}
+            </p>
+            }
+            }
           </div>
         </div>
-      </article>
-
-      <aside class="ob-metrics-card" aria-label="Marketplace metrics">
-        <div class="ob-metric">
-          <p data-cy="vServices" class="ob-metric-value">
-            <span class="ob-metric-number">{{ services.length }}</span> verified services
-          </p>
-          @for (serv of services; track serv; let pos = $index) {
-          @if (currentIndexServ === pos) {
-          <p data-cy="nameServices" [class.break-all]="hasLongWord(serv, 20)"
-            [class.break-words]="!hasLongWord(serv, 20)" class="ob-rotating-tag">
-            {{ serv }}
-          </p>
-          }
-          }
-        </div>
-
-        <div class="ob-metric">
-          <p data-cy="rPublishers" class="ob-metric-value">
-            <span class="ob-metric-number">{{ publishers.length }}</span> registered providers
-          </p>
-          @for (pub of publishers; track pub; let pos = $index) {
-          @if (currentIndexPub === pos) {
-          <p data-cy="nameOrgs" [class.break-all]="hasLongWord(pub, 20)" [class.break-words]="!hasLongWord(pub, 20)"
-            class="ob-rotating-tag">
-            {{ pub }}
-          </p>
-          }
-          }
-        </div>
-
-        <a data-cy="publishOff" id="registerHere" [href]="domeRegister" target="_blank" rel="noreferrer"
-          class="ob-btn ob-btn-outline-accent">
-          <svg class="ob-btn-icon" fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 10h14m0 0-5-5m5 5-5 5" />
-          </svg>
-          {{ 'HEADER._register_here' | translate }}
-        </a>
-      </aside>
+      </div>
     </div>
+  </section>
 
-    <section class="mt-12 mb-10" aria-labelledby="obAboutTitle">
-      <div class="max-w-3xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary-50">About the marketplace</p>
-        <h2 id="obAboutTitle" class="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight text-primary-100">
-          One place to find, trust and share smart-city data and AI
-        </h2>
-        <p class="mt-3 text-base md:text-lg leading-relaxed text-gray-600">
-          The CitCom.ai Marketplace is the entry point to the CitCom.ai Testing and Experimentation Facility. Cities,
-          companies and research centres publish datasets, AI models and digital services here, so others can discover,
-          compare and use them under clear and verifiable terms.
-        </p>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-        @for (benefit of benefits; track benefit.title) {
-        <article
-          class="flex flex-col h-full p-6 rounded-xl border border-gray-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md">
-          <span class="mb-4 h-1 w-8 rounded-full bg-primary-50" aria-hidden="true"></span>
-          <h3 class="text-lg font-bold tracking-tight text-primary-100">{{ benefit.title }}</h3>
-          <p class="mt-2 text-[0.95rem] leading-relaxed text-gray-600">{{ benefit.text }}</p>
-        </article>
-        }
-      </div>
-    </section>
-
-    <section class="ob-catalog-card" aria-label="Catalog">
-      @if(searchEnabled){
-      <div class="ob-search-wrap"
-        [ngClass]="isFilterPanelShown ? 'sticky top-[134px] z-20': 'sticky top-[88px] z-20'">
+  <!-- ===== Search (filters the categories below) ===== -->
+  @if(searchEnabled){
+  <section class="ob-search-band" aria-label="Search">
+    <div class="ob-shell">
+      <div class="ob-search-card">
         <form class="ob-search-form">
+          <label for="dashboardSearchBar" class="ob-search-label">Explore the catalogue</label>
           <div class="ob-search-inner">
+            <svg class="ob-icon ob-search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
             <input type="search" id="dashboardSearchBar" [formControl]="searchField" (input)="onSearchInput()"
               (keydown.enter)="filterSearch($event)" class="ob-search-input"
               placeholder="{{ 'DASHBOARD._search_ph' | translate }}">
             <button type="submit" id="dashboardSearchButton" (click)="filterSearch($event)" class="ob-search-btn">
-              <svg class="ob-search-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-              </svg>
-              <span class="sr-only">{{ 'DASHBOARD._search' | translate }}</span>
+              {{ 'DASHBOARD._search' | translate }}
             </button>
           </div>
         </form>
+        <p class="ob-search-hint">Type to filter the categories below, or open the full list of services.</p>
       </div>
-      }
+    </div>
+  </section>
+  }
+
+  <!-- ===== Categories ===== -->
+  <section class="ob-section" [class.ob-section--after-search]="searchEnabled" aria-labelledby="obCatTitle">
+    <div class="ob-shell">
+      <div class="ob-section-head ob-section-head--rule">
+        <h2 id="obCatTitle" class="ob-display-title">Browse by category</h2>
+        <button type="button" class="ob-text-link" (click)="goToSearch()">
+          All services
+          <svg class="ob-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
 
       <bae-off-featured data-cy="offFeatured" [searchTerm]="catalogSearchTerm"></bae-off-featured>
-    </section>
+    </div>
+  </section>
+
+  <!-- ===== Featured services (offerings already loaded by this page) ===== -->
+  @if (productOfferings && productOfferings.length > 0) {
+  <section class="ob-section ob-section--muted" aria-labelledby="obFeatTitle">
+    <div class="ob-shell">
+      <div class="ob-section-head">
+        <h2 id="obFeatTitle" class="ob-display-title">Featured services</h2>
+        <button type="button" class="ob-text-link" (click)="goToSearch()">
+          See the catalogue
+          <svg class="ob-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="ob-feat-grid">
+        @for (offering of productOfferings.slice(0, 3); track offering.id) {
+        <article class="ob-feat-card">
+          <div class="ob-feat-media">
+            <img [src]="getOfferingImage(offering)" alt="" loading="lazy" />
+            @if (getOfferingCategory(offering); as category) {
+            <span class="ob-feat-badge">{{ category }}</span>
+            }
+          </div>
+          <div class="ob-feat-body">
+            <h3 class="ob-feat-title">
+              <button type="button" class="ob-feat-link" (click)="goToOffering(offering)">{{ offering.name }}</button>
+            </h3>
+            @if (offering.description) {
+            <div class="ob-feat-desc" [innerHTML]="offering.description"></div>
+            }
+            <span class="ob-feat-more" aria-hidden="true">
+              View details
+              <svg class="ob-icon ob-icon-sm" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </span>
+          </div>
+        </article>
+        }
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- ===== About ===== -->
+  <section class="ob-section" aria-labelledby="obAboutTitle">
+    <div class="ob-shell">
+      <p class="ob-eyebrow ob-eyebrow--on-light"><span class="ob-eyebrow-line" aria-hidden="true"></span>About the
+        marketplace</p>
+      <h2 id="obAboutTitle" class="ob-about-title">One place to find, trust and share smart-city data and AI</h2>
+      <p class="ob-about-text">
+        The CitCom.ai Marketplace is the entry point to the CitCom.ai Testing and Experimentation Facility. Cities,
+        companies and research centres publish datasets, AI models and digital services here, so others can discover,
+        compare and use them under clear and verifiable terms.
+      </p>
+
+      <div class="ob-benefits">
+        @for (benefit of benefits; track benefit.title; let i = $index) {
+        <article class="ob-benefit">
+          @if (i === 0) {
+          <svg class="ob-icon ob-benefit-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 5 6v6c0 4.2 3 7.6 7 9 4-1.4 7-4.8 7-9V6l-7-3Z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          } @else if (i === 1) {
+          <svg class="ob-icon ob-benefit-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" />
+            <path d="M14 3v5h5M9 14l2 2 4-4" />
+          </svg>
+          } @else {
+          <svg class="ob-icon ob-benefit-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="9" cy="8" r="3.5" />
+            <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8" />
+          </svg>
+          }
+          <h3 class="ob-benefit-title">{{ benefit.title }}</h3>
+          <p class="ob-benefit-text">{{ benefit.text }}</p>
+        </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Providers call to action ===== -->
+  <section class="ob-provider" aria-labelledby="obProvTitle">
+    <div class="ob-shell ob-provider-grid">
+      <div class="ob-provider-copy">
+        <p class="ob-eyebrow"><span class="ob-eyebrow-line" aria-hidden="true"></span>For providers</p>
+        <h2 id="obProvTitle" class="ob-provider-title">Publish on CitCom.ai</h2>
+        <p class="ob-provider-text">
+          Use CitCom.ai Marketplace templates to document features, compliance and data handling. Once approved, your
+          services become available in the CitCom.ai catalogues.
+        </p>
+        <div class="ob-actions">
+          <a [href]="domeRegister" target="_blank" rel="noreferrer" class="ob-btn ob-btn-accent">
+            {{ 'HEADER._register_here' | translate }}
+            <svg class="ob-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a [href]="customersLink" target="_blank" rel="noreferrer" class="ob-btn ob-btn-ghost-light">
+            Visit project website
+          </a>
+        </div>
+      </div>
+      <div class="ob-provider-media" aria-hidden="true"></div>
+    </div>
   </section>
 </div>
 }

@@ -73,5 +73,6 @@ export interface ThemeConfig {
   authUrls?: ThemeAuthUrlsConfig;
   colors?: ThemeColorsConfig;
   dashboard?: DashboardConfig;
+  forceLightMode?: boolean; // Optional: ignore the OS/stored dark preference for this theme
   // More theme specific propierties
 }

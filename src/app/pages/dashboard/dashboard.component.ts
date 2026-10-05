@@ -34,7 +34,11 @@ export interface IDashboardStats {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.onboarding.component.css',
+  styleUrls: [
+    './dashboard.onboarding.component.css',
+    './dashboard.search.component.css',
+    './dashboard.sections.component.css'
+  ],
   standalone: true,
   imports: [TranslateModule, ReactiveFormsModule, FeaturedComponent, NgClass, DashboardWhatsDome, DashboardHeroComponent, DashboardStatsComponent, DashboardServicesComponent, DashboardCustomersComponent, DashboardProvidersComponent, DashboardEcosystemComponent],
 })
@@ -212,6 +216,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   goToSearch() {
     this.router.navigate(['/search']);
+  }
+
+  goToOffering(offering: ProductOffering) {
+    this.router.navigate(['/search', offering.id]);
+  }
+
+  // Same image selection as the offering cards: profile picture first, then any picture
+  getOfferingImage(offering: ProductOffering): string {
+    const attachments = offering?.attachment ?? [];
+    const profile = attachments.filter((a) => a.name === 'Profile Picture');
+    const pictures = profile.length > 0 ? profile : attachments.filter((a) => a.attachmentType === 'Picture');
+    return pictures.at(0)?.url ?? 'https://placehold.co/600x400/svg';
+  }
+
+  getOfferingCategory(offering: ProductOffering): string | undefined {
+    return offering?.category?.find((c) => !!c?.name)?.name;
   }
 
   filterSearch(event: Event) {

@@ -269,3 +269,45 @@
 .header-light .mobile-user-box__email {
   color: #6b7280;
 }
+
+/* ===== Grouped user menu ===== */
+.dropdown-session {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 4px 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+.dropdown-session-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: var(--mk-accent-ink, #0b5f69);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dropdown-session-btn:hover {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.dropdown-item-icon {
+  width: 18px;
+  margin-right: 0.25rem;
+  color: #5b6472;
+}
+
+.dropdown-item--danger {
+  color: #a3200f;
+}
+
+.dropdown-item--danger .dropdown-item-icon {
+  color: inherit;
+}

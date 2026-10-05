@@ -22,6 +22,7 @@ import { UsageListComponent } from "src/app/pages/usage-specs/usage-sections/usa
 import { UsageSpecComponent } from "src/app/shared/forms/usage-spec/usage-spec.component"
 import { CreateUsageSpecComponent } from "./usage-sections/create-usage-spec/create-usage-spec.component"
 import { UpdateUsageSpecComponent } from './usage-sections/update-usage-spec/update-usage-spec.component'
+import { AccountHeaderComponent } from "src/app/shared/account-header/account-header.component";
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -35,7 +36,8 @@ import { takeUntil } from 'rxjs/operators';
     UsageListComponent,
     UsageSpecComponent,
     CreateUsageSpecComponent,
-    UpdateUsageSpecComponent
+    UpdateUsageSpecComponent,
+    AccountHeaderComponent
   ],
   providers: [DatePipe],
   templateUrl: './usage-specs.component.html',
