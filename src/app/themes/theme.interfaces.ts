@@ -74,5 +74,6 @@ export interface ThemeConfig {
   colors?: ThemeColorsConfig;
   dashboard?: DashboardConfig;
   forceLightMode?: boolean; // Optional: ignore the OS/stored dark preference for this theme
+  hideNoComplianceLevel?: boolean; // Optional: hide the "No level" badge of offerings without a Gaia-X compliance VC
   // More theme specific propierties
 }

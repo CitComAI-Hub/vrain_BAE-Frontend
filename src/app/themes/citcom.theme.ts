@@ -21,6 +21,7 @@ export const CITCOM_THEME_CONFIG: ThemeConfig = {
   name: 'CITCOM',
   displayName: 'Marketplace-Citcom.ai',
   isDefault: true,
+  hideNoComplianceLevel: true,
   assets: {
     logoUrl: 'assets/themes/citcom/logo-citcom.png',
     jumboBgUrl: 'assets/themes/citcom/blueBackground.png'

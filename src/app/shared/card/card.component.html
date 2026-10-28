@@ -20,11 +20,13 @@
         <fa-icon [icon]="faAtom" class="mr-2" [ngClass]="complianceLevel == 'NL' ? 'text-red-700' : complianceLevel == 'BL' ? 'text-orange-700' : complianceLevel == 'P' ? 'text-yellow-700' : 'text-green-700'"></fa-icon>
         -->
         @if(complianceLevel=='NL'){
+          @if(!currentTheme?.hideNoComplianceLevel){
           <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
           [ngClass]="complianceLevel == 'NL' ? 'bg-red-200 text-red-700' : complianceLevel == 'BL' ? 'bg-orange-200 text-orange-700' : complianceLevel == 'P' ? 'bg-yellow-200 text-yellow-700' : 'bg-green-200 text-green-700'">
           <fa-icon [icon]="faAtom" class="mr-2" [ngClass]="complianceLevel == 'NL' ? 'text-red-700' : complianceLevel == 'BL' ? 'text-orange-700' : complianceLevel == 'P' ? 'text-yellow-700' : 'text-green-700'"></fa-icon>
               No level
           </a>
+        }
         }@else if(complianceLevel=='BL'){
           <img class="z-10 dark:text-white rounded-md mb-2 mr-2 max-h-[1.2rem] align-middle" src="assets/logos/baseline.png">
         } @else if(complianceLevel=='P') {
@@ -153,11 +155,13 @@
 
                   <div class="h-fit overflow-x-hidden flex items-center flex-wrap">
                     @if(complianceLevel=='NL'){
+                      @if(!currentTheme?.hideNoComplianceLevel){
                       <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
                       [ngClass]="complianceLevel == 'NL' ? 'bg-red-200 text-red-700' : complianceLevel == 'BL' ? 'bg-orange-200 text-orange-700' : complianceLevel == 'P' ? 'bg-yellow-200 text-yellow-700' : 'bg-green-200 text-green-700'">
                       <fa-icon [icon]="faAtom" class="mr-2" [ngClass]="complianceLevel == 'NL' ? 'text-red-700' : complianceLevel == 'BL' ? 'text-orange-700' : complianceLevel == 'P' ? 'text-yellow-700' : 'text-green-700'"></fa-icon>
                           No level
                       </a>
+                    }
                     }@else if(complianceLevel=='BL'){
                       <img class="z-10 dark:text-white rounded-md mb-2 mr-2 max-h-[1.2rem] align-middle" src="assets/logos/baseline.png">
                     } @else if(complianceLevel=='P') {

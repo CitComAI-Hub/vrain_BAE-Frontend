@@ -21,6 +21,7 @@ import { Location } from '@angular/common';
 import {firstValueFrom, Subject} from "rxjs";
 import { takeUntil } from 'rxjs/operators';
 import { UsageServiceService } from 'src/app/services/usage-service.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 interface UsageMetricCard {
   id: string;
@@ -67,6 +68,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   complianceProf:any[] = [];
   additionalCerts:any[] = [];
   complianceLevel:string='NL';
+  hideNoComplianceLevel = false;
   complianceDescription:string='No level. This product hasnt reached any compliance level yet.'
   serviceSpecs:any[] = [];
   resourceSpecs:any[]=[];
@@ -129,8 +131,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private eventMessage: EventMessageService,
     private accService: AccountServiceService,
     private usageService: UsageServiceService,
-    private location: Location
+    private location: Location,
+    private themeService: ThemeService
   ) {
+    this.hideNoComplianceLevel = !!this.themeService.getCurrentThemeConfig()?.hideNoComplianceLevel;
     this.showTermsMore=false;
     this.eventMessage.messages$
     .pipe(takeUntil(this.destroy$))
