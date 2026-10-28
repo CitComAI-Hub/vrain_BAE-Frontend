@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 bg-blend-multiply rounded-b-2xl" [style.background-image]="'url(' + currentTheme?.assets?.cardDefaultBgUrl + ')'">
+  <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 bg-blend-multiply rounded-b-2xl" [style.background-image]="currentTheme?.assets?.cardDefaultBgUrl ? 'url(' + currentTheme?.assets?.cardDefaultBgUrl + ')' : null">
     <div class="flex-1 h-full px-5 py-5 bg-white/95 rounded-b-2xl">
       <div data-cy="searchOfferCategories" class="flex items-center flex-wrap overflow-y-hidden overflow-x-hidden align-middle">
         <!--<a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
