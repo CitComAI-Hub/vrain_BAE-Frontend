@@ -190,3 +190,7 @@ When creating a new theme or adding new links, you must add these keys to the la
 Ensure that any new keys are added to the JSON files for all supported languages (e.g., , `fr-galaxy.json`). `es-galaxy.json`
 
 
+
+## Releases and Docker image
+
+The CITCOM Marketplace image is published automatically from git tags. See [docs/tags-and-publishing.md](docs/tags-and-publishing.md).
