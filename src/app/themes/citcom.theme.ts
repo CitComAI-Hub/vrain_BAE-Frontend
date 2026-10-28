@@ -23,8 +23,7 @@ export const CITCOM_THEME_CONFIG: ThemeConfig = {
   isDefault: true,
   assets: {
     logoUrl: 'assets/themes/citcom/logo-citcom.png',
-    jumboBgUrl: 'assets/themes/citcom/blueBackground.png',
-    cardDefaultBgUrl: 'assets/themes/citcom/cardBackground.svg'
+    jumboBgUrl: 'assets/themes/citcom/blueBackground.png'
   },
   links: {
     headerLinks: citcomHeaderLinks,
