@@ -1,5 +1,15 @@
-.truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+/* Same look as the category badge of the home cards (.ob-feat-badge) */
+.category-badge {
+  display: inline-block;
+  max-width: 100%;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #1f242c;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
