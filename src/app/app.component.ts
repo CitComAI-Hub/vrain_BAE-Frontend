@@ -78,6 +78,9 @@ export class AppComponent implements OnInit {
         initFlowbite();
         //this.refreshApi.startInterval(3000, ev.value);
       }
+      if(ev.type === 'SessionExpired') {
+        this.refreshApi.stopInterval();
+      }
     })
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) === '{}'){

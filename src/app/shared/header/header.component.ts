@@ -175,7 +175,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
         this.cdr.detectChanges();
       }
 
-      if (ev.type === 'LoginProcess') {
+      if (ev.type === 'LoginProcess' || ev.type === 'SessionExpired') {
         this.hydrateLoginFromStorage();
       }
     });
