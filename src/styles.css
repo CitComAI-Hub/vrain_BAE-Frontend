@@ -157,37 +157,53 @@ markdown blockquote {
 }
 
 markdown code {
-  font-family: monospace;
-  background-color: #2d58a7;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background-color: #f3f4f6;
+  color: #1f242c;
+  border: 1px solid #e5e7eb;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
 }
 
 markdown pre {
-  font-family: monospace;
-  background-color: #2d58a7;
-  padding: 0.5em;
-  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background-color: #f3f4f6;
+  color: #1f242c;
+  border: 1px solid #e5e7eb;
+  padding: 0.75em 1em;
+  border-radius: 8px;
   overflow: auto;
+  margin-bottom: 1em;
+}
+
+markdown pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 1em;
 }
 
 markdown table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 1em;
 }
 
 markdown table th,
 markdown table td {
-  border: 1px solid var(--blockquote-border-color);
-  padding: 8px;
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
 }
 
 markdown table th {
-  background-color: #2d58a7;
-}
-
-markdown body.dark table th {
-  background-color: #2d58a7;
+  background-color: #f3f4f6;
+  color: #1f242c;
+  font-weight: 700;
 }
 
 markdown img {
@@ -196,7 +212,7 @@ markdown img {
 }
 
 markdown a {
-  color: #007bff;
+  color: rgb(var(--theme-primary-50));
   text-decoration: none;
 }
 
@@ -710,4 +726,174 @@ body {
 
 .acc-main table tbody tr:hover {
   background-color: #f9fafb;
+}
+
+/* ===== Product details page ===== */
+.pd-page {
+  color: #1f242c;
+}
+
+/* Long words wrap at the edge instead of breaking every line mid-word */
+.pd-page .break-all {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.pd-breadcrumb {
+  padding: 0 4px 16px;
+}
+
+.pd-breadcrumb button,
+.pd-breadcrumb span {
+  color: #5b6472;
+}
+
+.pd-breadcrumb button:hover {
+  color: #1f242c;
+}
+
+.pd-hero {
+  border-radius: 20px;
+}
+
+.pd-hero-media {
+  background: #f9fafb;
+  border-left: 1px solid #e5e7eb;
+}
+
+.pd-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #1f242c;
+}
+
+.pd-hero markdown {
+  color: #4b5563;
+}
+
+.pd-tabs {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.pd-tabs .border-gray-300 {
+  border-color: #e5e7eb;
+}
+
+.pd-body {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.pd-body markdown {
+  color: #374151;
+}
+
+.pd-h2 {
+  margin: 40px 0 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #1f242c;
+}
+
+#details-container > .pd-h2:first-of-type {
+  margin-top: 8px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.pd-link {
+  font-weight: 600;
+  color: rgb(var(--theme-primary-50));
+}
+
+.pd-link:hover {
+  text-decoration: underline;
+}
+
+/* Cards (prices, characteristics, license...): flat, like the catalogue cards */
+.pd-body .shadow,
+.pd-body .shadow-md {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.pd-body .rounded-lg {
+  border-radius: 14px;
+}
+
+.pd-body .border-primary-100 {
+  border-color: #e5e7eb;
+}
+
+/* Price headers: neutral instead of blue / green / yellow blocks */
+.pd-body .bg-blue-500,
+.pd-body .bg-green-500,
+.pd-body .bg-yellow-300 {
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pd-body .bg-blue-500 h5,
+.pd-body .bg-green-500 h5,
+.pd-body .bg-yellow-300 h5 {
+  margin-bottom: 0;
+  padding: 16px 24px;
+  font-size: 1.25rem;
+  color: #1f242c;
+}
+
+/* Characteristic values: raw JSON or long values read as code */
+#chars-container label {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #1f242c;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+#chars-container h3 {
+  font-size: 1.15rem;
+}
+
+/* Primary actions: same dark button as the catalogue */
+.pd-page .bg-blue-700 {
+  background: #1f242c;
+}
+
+.pd-page .bg-blue-700:hover,
+.pd-page .hover\:bg-blue-800:hover,
+.pd-page .hover\:bg-primary-50:hover {
+  background: #11151b;
+}
+
+.pd-page .focus\:ring-blue-300:focus {
+  --tw-ring-color: rgb(var(--theme-primary-50) / 0.4);
+}
+
+/* Section content aligned with its heading */
+.pd-body .container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pd-body .grid.justify-center {
+  justify-content: start;
+  padding-left: 0;
+}
+
+.pd-body .flex-wrap.justify-center {
+  justify-content: flex-start;
 }
