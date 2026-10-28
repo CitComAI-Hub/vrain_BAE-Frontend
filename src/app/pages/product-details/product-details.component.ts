@@ -345,6 +345,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     console.log('-------- producto')
     console.log(this.productOff)
     this.cdr.detectChanges();
+    if (this.productOff?.category) {
+      this.productOff.category = await this.api.sortCategories(this.productOff.category);
+    }
     this.category = this.productOff?.category?.at(0)?.name ?? 'none';
     this.categories = this.productOff?.category;
     this.price = this.productOff?.productOfferingPrice?.at(0)?.price?.value + ' ' + this.productOff?.productOfferingPrice?.at(0)?.price?.unit ?? 'n/a';

@@ -19,6 +19,9 @@ export class ApiServiceService {
   public static CATALOG_LIMIT: number = environment.CATALOG_LIMIT;
   public static CATEGORY_LIMIT: number = environment.CATEGORY_LIMIT;
 
+  // id -> isRoot of the launched categories, loaded once
+  private categoryRoots: Promise<Map<string, boolean>> | undefined;
+
   constructor(private http: HttpClient, private localStorage: LocalStorageService) { }
 
   getAllProducts(): Observable<ProductOfferingModel[]> {
@@ -46,14 +49,15 @@ export class ApiServiceService {
     }
     return await Promise.all(normalized.map(async (offer: any): Promise<ProductOffering> => {
       try {
-        // Getting specs and prices in parallel
-        const [spec, prodPrices] = await Promise.all([
+        // Getting specs, prices and the category order in parallel
+        const [spec, prodPrices, categories] = await Promise.all([
           offer.productSpecification?.id
             ? this.getProductSpecification(offer.productSpecification.id)
             : Promise.resolve(undefined),
           offer.productOfferingPrice
             ? Promise.all(offer.productOfferingPrice.map((p: { id: any; }) => this.getProductPrice(p.id)))
-            : Promise.resolve([])
+            : Promise.resolve([]),
+          this.sortCategories(offer.category ?? [])
         ]);
 
         // Building `ProductOffering` object
@@ -71,7 +75,7 @@ export class ApiServiceService {
           agreement: offer.agreement ?? [],
           attachment: spec?.attachment ?? [],
           bundledProductOffering: offer.bundledProductOffering ?? [],
-          category: offer.category ?? [],
+          category: categories,
           channel: offer.channel ?? [],
           marketSegment: offer.marketSegment ?? [],
           place: offer.place ?? [],
@@ -199,6 +203,29 @@ export class ApiServiceService {
         })
       )
     );
+  }
+
+  /**
+   * Offerings keep their categories in the order they were assigned, so a card
+   * could show "Data, Mobility" and the next one "Waste management, Data".
+   * Put the specific (child) categories first and the root ones after.
+   */
+  async sortCategories(categories: any[]) {
+    if (categories.length < 2) {
+      return categories;
+    }
+    if (!this.categoryRoots) {
+      this.categoryRoots = this.getLaunchedCategories().then((cats: any[]) => {
+        if (cats.length == 0) {
+          // Do not cache a failed load
+          this.categoryRoots = undefined;
+        }
+        return new Map(cats.map((c: any) => [c.id, !!c.isRoot]));
+      });
+    }
+    const roots = await this.categoryRoots;
+    const isRoot = (c: any) => roots.get(c?.id) ? 1 : 0;
+    return [...categories].sort((a, b) => isRoot(a) - isRoot(b));
   }
 
   getCategories(status: any[]) {
