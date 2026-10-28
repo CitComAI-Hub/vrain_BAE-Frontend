@@ -69,6 +69,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   additionalCerts:any[] = [];
   complianceLevel:string='NL';
   hideNoComplianceLevel = false;
+
+  // Hide the whole section when it would only say "No level"
+  get showComplianceSection(): boolean {
+    return !(this.hideNoComplianceLevel && this.complianceLevel == 'NL' && !this.selfAtt
+      && this.complianceProf.length == 0 && this.additionalCerts.length == 0);
+  }
   complianceDescription:string='No level. This product hasnt reached any compliance level yet.'
   serviceSpecs:any[] = [];
   resourceSpecs:any[]=[];
