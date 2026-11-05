@@ -5,3 +5,27 @@
     background-repeat: no-repeat;
     background-position: center;
  }
+
+/* Until the product is loaded: no empty fields or placeholder image, a loader instead */
+.pd-loading .mk-shell > :not(.pb-4):not(.pd-loader) {
+    visibility: hidden;
+}
+.pd-loader {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+}
+.pd-spinner {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 3px solid var(--mk-accent-tint, rgba(0, 0, 0, 0.1));
+    border-top-color: var(--mk-accent, currentColor);
+    border-radius: 50%;
+    animation: pd-spin 0.8s linear infinite;
+}
+@keyframes pd-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pd-spinner { animation-duration: 2.4s; }
+}

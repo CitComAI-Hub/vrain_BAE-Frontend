@@ -79,6 +79,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   serviceSpecs:any[] = [];
   resourceSpecs:any[]=[];
   check_logged:boolean=false;
+  // false until the product is loaded: the page shows a loader instead of empty fields
+  loaded: boolean = false;
   cartSelection:boolean=false;
   check_prices:boolean=false;
   selected_price:any;
@@ -260,6 +262,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log('--- Details ID:')
     console.log(this.id)
+    try {
     let prod = await this.api.getProductById(this.id);
     let spec = await this.api.getProductSpecification(prod.productSpecification.id);
     this.prodSpec=spec;
@@ -397,6 +400,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       let cart = await this.cartService.getShoppingCart();
       const exists = cart.some((item: any) => item.id === this.productOff?.id);
       this.productAlreadyInCart=exists;
+      this.cdr.detectChanges();
+    }
+    } finally {
+      // Also on an error: never a loader forever
+      this.loaded = true;
       this.cdr.detectChanges();
     }
   }

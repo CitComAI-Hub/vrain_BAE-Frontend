@@ -1,5 +1,5 @@
 
-<div class="pd-page mk-page">
+<div class="pd-page mk-page" [class.pd-loading]="!loaded">
 <div class="mk-shell">
     <!-- Breadcrumb -->
     <div class="pb-4">
@@ -25,6 +25,12 @@
         </nav>
     </div>
     <!-- End Breadcrumb -->
+    @if (!loaded) {
+    <div class="pd-loader" role="status" aria-live="polite">
+        <span class="pd-spinner" aria-hidden="true"></span>
+        <span class="sr-only">{{ 'PRODUCT_DETAILS._details' | translate }}</span>
+    </div>
+    }
 
     <!-- START HEADER CARD -->
     <div class="pd-hero mk-card w-full lg:h-fit mb-6 overflow-hidden lg:grid lg:grid-cols-60/40">
