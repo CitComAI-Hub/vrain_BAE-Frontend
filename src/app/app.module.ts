@@ -44,6 +44,7 @@ import { CreateCatalogComponent } from './pages/seller-offerings/offerings/selle
 import { SellerCatalogsComponent } from './pages/seller-offerings/offerings/seller-catalogs/seller-catalogs.component';
 import { UpdateCatalogComponent } from './pages/seller-offerings/offerings/seller-catalogs/update-catalog/update-catalog.component';
 import { CreateOfferComponent } from './pages/seller-offerings/offerings/seller-offer/create-offer/create-offer.component';
+import { RulebookOfferComponent } from './pages/seller-offerings/offerings/seller-offer/rulebook-offer/rulebook-offer.component';
 import { NewPricePlanComponent } from './pages/seller-offerings/offerings/seller-offer/new-price-plan/new-price-plan.component';
 import { SellerOfferComponent } from './pages/seller-offerings/offerings/seller-offer/seller-offer.component';
 import { UpdateOfferComponent } from './pages/seller-offerings/offerings/seller-offer/update-offer/update-offer.component';
@@ -132,6 +133,7 @@ import { RequestValidationModalComponent } from './pages/seller-offerings/offeri
     CreateServiceSpecComponent,
     CreateResourceSpecComponent,
     CreateOfferComponent,
+    RulebookOfferComponent,
     CategoriesRecursionComponent,
     UpdateProductSpecComponent,
     UpdateResourceSpecComponent,

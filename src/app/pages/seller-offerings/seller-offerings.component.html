@@ -34,8 +34,8 @@
         <p class="acc-help-title">How publishing works</p>
         <ol class="acc-help-steps">
           <li><span class="acc-help-step">1</span>Create a catalogue</li>
-          <li><span class="acc-help-step">2</span>Describe the product specification</li>
-          <li><span class="acc-help-step">3</span>Publish an offer with its price plan</li>
+          <li><span class="acc-help-step">2</span>New offer: choose its class in the rulebook</li>
+          <li><span class="acc-help-step">3</span>Fill in a few fields, review and publish</li>
         </ol>
       </div>
     </aside>
@@ -66,7 +66,8 @@
           <create-resource-spec></create-resource-spec>
         }
         @if(show_create_offer){
-          <create-offer></create-offer>
+          <!-- CitCom: offers are created from a rulebook class (the proxy rejects any other) -->
+          <rulebook-offer></rulebook-offer>
         }
         @if(show_create_catalog){
           <create-catalog></create-catalog>
