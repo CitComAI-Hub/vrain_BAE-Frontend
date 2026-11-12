@@ -1,0 +1,156 @@
+<div class="rb">
+  <nav class="rb-crumb" aria-label="Breadcrumb">
+    <button type="button" (click)="goBack()">&larr; My offers</button>
+    <span>New offer</span>
+  </nav>
+
+  <header class="rb-head">
+    <h2>New offer</h2>
+    <p>Choose what you offer and fill in a few fields. The access policies and the terms of use come from the
+      <a href="https://github.com/CitComAI-Hub/citcom-ds-rulebook" target="_blank" rel="noopener">CitCom rulebook</a>,
+      so every offer gives exactly what its class allows.</p>
+  </header>
+
+  @if (loading) {
+    <p class="rb-muted">Loading&hellip;</p>
+  } @else if (notAvailable) {
+    <p class="rb-alert">{{ notAvailable }}</p>
+  } @else {
+    <section class="rb-section">
+      <h3>1. What do you offer?</h3>
+      <div class="rb-classes" role="radiogroup">
+        @for (cls of classes; track cls.id) {
+          <button type="button" role="radio" class="rb-class" [class.rb-class--on]="selected?.id === cls.id"
+                  [attr.aria-checked]="selected?.id === cls.id" (click)="choose(cls)">
+            <strong>{{ cls.title }}</strong>
+            <span>{{ cls.for }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    @if (selected) {
+      <section class="rb-section">
+        <h3>2. The offer</h3>
+        <label for="rb-title">Title</label>
+        <input id="rb-title" type="text" maxlength="100" [(ngModel)]="form.title" (ngModelChange)="onTitle()" placeholder="Access to the bike stations of Acme" />
+
+        <label for="rb-desc">Description</label>
+        <textarea id="rb-desc" rows="5" [(ngModel)]="form.description" placeholder="What it contains, how to access it (Markdown)"></textarea>
+
+        <div class="rb-grid">
+          <div>
+            <label for="rb-name">Short name</label>
+            <input id="rb-name" type="text" [(ngModel)]="form.name" (ngModelChange)="nameEdited = true; onName()" />
+            <small>{{ help('name') }}</small>
+          </div>
+          <div>
+            <label for="rb-path">Path in your gateway</label>
+            <input id="rb-path" type="text" [(ngModel)]="form.path" (ngModelChange)="generated = null" placeholder="/ngsi-ld" />
+            <small>{{ help('path') }}</small>
+          </div>
+          @if (asks('entity_type')) {
+            <div>
+              <label for="rb-type">Entity type</label>
+              <input id="rb-type" type="text" [(ngModel)]="form.entity_type" (ngModelChange)="generated = null" placeholder="BikeHireDockingStation" />
+              <small>{{ help('entity_type') }}</small>
+            </div>
+          }
+          @if (asks('role')) {
+            <div>
+              <label for="rb-role">Role of its users</label>
+              <input id="rb-role" type="text" [(ngModel)]="form.role" (ngModelChange)="roleEdited = true; generated = null" />
+              <small>{{ help('role') }}</small>
+            </div>
+          }
+        </div>
+
+        <label for="rb-image">Image (URL, optional)</label>
+        <input id="rb-image" type="url" [(ngModel)]="form.image" placeholder="https://…/picture.jpg" />
+        <small>Offers with an image are shown on the marketplace home.</small>
+      </section>
+
+      <section class="rb-section">
+        <h3>3. Catalogue and categories</h3>
+        @if (catalogs.length === 0) {
+          <p class="rb-alert">You have no catalogue yet. Create one in "Catalogues" first.</p>
+        } @else {
+          <label for="rb-catalog">Catalogue</label>
+          <select id="rb-catalog" [(ngModel)]="form.catalog">
+            <option value="" disabled>Choose a catalogue</option>
+            @for (c of catalogs; track c.id) {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          </select>
+        }
+        <fieldset class="rb-cats">
+          <legend>Categories</legend>
+          @for (c of categories; track c.id) {
+            <label class="rb-check">
+              <input type="checkbox" [checked]="form.categories.includes(c.id)" (change)="toggleCategory(c.id, $any($event.target).checked)" />
+              {{ c.name }}
+            </label>
+          }
+        </fieldset>
+      </section>
+
+      <section class="rb-section">
+        <h3>4. Terms of use</h3>
+        <p class="rb-muted">The terms are those of the class. You only fill in these details; the ones about your
+          organisation are remembered for your next offers.</p>
+        @for (group of [['offer', 'About this offer'], ['provider', 'About your organisation (remembered)']]; track group[0]) {
+          @if (termsGroup(group[0]).length) {
+            <h4 class="rb-sub">{{ group[1] }}</h4>
+          }
+          @for (f of termsGroup(group[0]); track f.name) {
+            <label [for]="'rb-t-' + f.name">{{ f.description }}@if (f.optional) {<em class="rb-opt">(optional)</em>}</label>
+            @if (f.name === 'origin' || f.name === 'quality') {
+              <textarea [id]="'rb-t-' + f.name" rows="3" [(ngModel)]="terms[f.name]" (ngModelChange)="generated = null" [placeholder]="f.example"></textarea>
+            } @else {
+              <input [id]="'rb-t-' + f.name" type="text" [(ngModel)]="terms[f.name]" (ngModelChange)="generated = null" [placeholder]="f.example" />
+            }
+          }
+        }
+      </section>
+
+      <section class="rb-section">
+        <h3>5. Review and publish</h3>
+        <button type="button" class="rb-btn" [disabled]="!ready()" (click)="preview()">Preview the offer</button>
+        @if (!ready()) {
+          <small>Fill in every required field to preview.</small>
+        }
+
+        @if (generated) {
+          <div class="rb-preview">
+            <h4>What buyers get</h4>
+            <ul>
+              @for (line of summary(); track line) {
+                <li>{{ line }}</li>
+              }
+            </ul>
+            <h4>Terms of use ({{ selected.title }})</h4>
+            <div class="rb-terms"><markdown [data]="generated.terms['License']"></markdown></div>
+            @if (generated.sibling_updates?.length) {
+              <p class="rb-muted">This offer adds a new role: your {{ generated.sibling_updates.length }} earlier
+                offer(s) with the same kind of credential will accept it too.</p>
+            }
+          </div>
+          <button type="button" class="rb-btn rb-btn--primary" [disabled]="publishing" (click)="publish()">
+            {{ publishing ? 'Publishing…' : 'Publish the offer' }}
+          </button>
+        }
+
+        @if (progress.length) {
+          <ul class="rb-progress">
+            @for (p of progress; track p) {
+              <li>{{ p }}</li>
+            }
+          </ul>
+        }
+        @if (error) {
+          <p class="rb-alert" role="alert">{{ error }}</p>
+        }
+      </section>
+    }
+  }
+</div>
