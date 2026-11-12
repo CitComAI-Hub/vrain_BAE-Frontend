@@ -35,3 +35,5 @@
 :host-context(.dark) .rb-head p, :host-context(.dark) .rb-muted, :host-context(.dark) .rb-class span { color: #d1d5db; }
 .rb-sub { font-weight: 600; font-size: .95rem; margin-top: .75rem; padding-top: .5rem; border-top: 1px solid #f3f4f6; }
 .rb-opt { font-weight: 400; color: #6b7280; margin-left: .375rem; }
+.rb-missing { font-size: .8rem; color: #92400e; }
+.rb-missing ul { list-style: disc; padding-left: 1.25rem; margin-top: .25rem; }

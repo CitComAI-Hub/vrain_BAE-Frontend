@@ -117,7 +117,14 @@
         <h3>5. Review and publish</h3>
         <button type="button" class="rb-btn" [disabled]="!ready()" (click)="preview()">Preview the offer</button>
         @if (!ready()) {
-          <small>Fill in every required field to preview.</small>
+          <div class="rb-missing">
+            <small>Still to fill in:</small>
+            <ul>
+              @for (m of missing(); track m) {
+                <li>{{ m }}</li>
+              }
+            </ul>
+          </div>
         }
 
         @if (generated) {
