@@ -170,11 +170,27 @@ export class RulebookOfferComponent implements OnInit {
     this.form.categories = on ? [...this.form.categories, id] : this.form.categories.filter((c) => c !== id);
   }
 
-  ready(): boolean {
+  // The required fields still empty, in the order of the form.
+  missing(): string[] {
+    if (!this.selected) return [];
     const f = this.form;
-    return !!this.selected && !!f.title.trim() && !!f.name && !!f.path && !!f.catalog &&
-      (!this.asks('entity_type') || !!f.entity_type) && (!this.asks('role') || !!f.role) &&
-      this.selected.terms_fields.every((t: any) => t.optional || !!(this.terms[t.name] || '').trim());
+    const out: string[] = [];
+    if (!f.title.trim()) out.push('Title');
+    if (!f.name.trim()) out.push('Short name');
+    if (!f.path.trim()) out.push('Path in your gateway');
+    if (this.asks('entity_type') && !f.entity_type.trim()) out.push('Entity type');
+    if (this.asks('role') && !f.role.trim()) out.push('Role of its users');
+    if (!f.catalog) out.push('Catalogue');
+    for (const scope of ['offer', 'provider']) {
+      for (const t of this.termsGroup(scope)) {
+        if (!t.optional && !(this.terms[t.name] || '').trim()) out.push(t.description);
+      }
+    }
+    return out;
+  }
+
+  ready(): boolean {
+    return !!this.selected && this.missing().length === 0;
   }
 
   private request() {
